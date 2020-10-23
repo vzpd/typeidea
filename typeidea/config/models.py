@@ -22,6 +22,10 @@ class Link(models.Model):
         verbose_name = verbose_name_plural = 'Link'
 
 
+    def __str__(self):
+        return self.title
+
+
 class SideBar(models.Model):
     STATUS_SHOW = 1
     STATUS_HIDE = 0
@@ -47,3 +51,7 @@ class SideBar(models.Model):
 
     class Meta:
         verbose_name = verbose_name_plural = 'SideBar'
+
+    
+    def __str__(self):
+        return self.title

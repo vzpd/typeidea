@@ -14,11 +14,14 @@ class Category(models.Model):
     status = models.PositiveIntegerField(default = STATUS_NORMAL, 
         choices = STATUS_ITEMS, verbose_name = 'status') 
     is_nav = models.BooleanField(default = False, verbose_name = 'is_nav') 
-    owner = models.ForeignKey(User, on_delete = models.DO_NOTHING, verbose_name = 'owner') 
+    owner = models.ForeignKey(User, blank = True, on_delete = models.DO_NOTHING, verbose_name = 'owner') 
     created_time = models.DateTimeField(auto_now_add = True, verbose_name = 'created_time') 
 
     class Meta: 
         verbose_name = verbose_name_plural = 'category'
+
+    def __str__(self):
+        return self.name
 
 
 class Tag(models.Model): 
@@ -31,12 +34,15 @@ class Tag(models.Model):
     name = models.CharField(max_length = 10, verbose_name = 'name')
     status = models.PositiveIntegerField(default = STATUS_NORMAL,
             choices = STATUS_ITEMS, verbose_name = 'status')
-    owner = models.ForeignKey(User, on_delete = models.DO_NOTHING, verbose_name = 'owner')
+    owner = models.ForeignKey(User, blank = True, on_delete = models.DO_NOTHING, verbose_name = 'owner')
     created_time = models.DateTimeField(auto_now_add = True, verbose_name = 'created_time') 
 
     
     class Meta: 
         verbose_name = verbose_name_plural = 'tag'
+    
+    def __str__(self):
+        return self.name
 
 
 class Post(models.Model):
@@ -55,9 +61,11 @@ class Post(models.Model):
             choices = STATUS_ITEMS, verbose_name = 'status')
     category = models.ForeignKey(Category, on_delete = models.DO_NOTHING, verbose_name = 'category')
     tag = models.ForeignKey(Tag, on_delete = models.DO_NOTHING, verbose_name = 'tag')
-    owner = models.ForeignKey(User, on_delete = models.DO_NOTHING, verbose_name = 'owner')
-    owner = models.ForeignKey(User, on_delete = models.DO_NOTHING, verbose_name = 'owner')
+    owner = models.ForeignKey(User, blank = True, on_delete = models.DO_NOTHING, verbose_name = 'owner')
     created_time = models.DateTimeField(auto_now_add = True, verbose_name = 'created_time') 
     class Meta:
         verbose_name = verbose_name_plural = 'post'
         ordering = ['-id']
+
+    def __str__(self):
+        return self.title
