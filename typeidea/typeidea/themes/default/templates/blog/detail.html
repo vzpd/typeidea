@@ -1,0 +1,17 @@
+{% extends './base.html' %}
+{% block title %} {{ post.title}} {% endblock %}
+
+
+{% block main %}
+	{% if post %}
+	<h1>{{ post.title }}</h1>
+	<div>
+		<span>Category:{{ post.category.name }}</span>
+		<span>Auth:{{ post.owner.username }}</span>
+	</div>
+	<hr/>
+	<p>
+		{{ post.content }}
+	</p>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends './base.html' %}
+{% block title %} {{ post.title}} {% endblock %}
+
+
+{% block main %}
+
+	{% if post %}
+	<div class = 'card post'>
+		<div class = 'card-body'>
+			<h2 class = 'card-title'>{{ post.title }}</h2>
+			
+			<span class = 'card-link'>Auth:<a href = "/">{{ post.owner.username }}</a></span>
+			<span class = 'card-link'>Category:<a href = "{% url 'category_list' post.category.id %}">
+					{{ post.category.name }}</a></span>
+			<span class = 'card-link'>Tag:<a href = "{% url 'tag_list' post.tag.id %}">
+					 {{ post.tag.name }}</a></span>
+		
+			<hr/>
+
+			<div class = 'card-text'>
+				<p>
+					{{ post.content }}
+				</p>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+{% endblock %}
