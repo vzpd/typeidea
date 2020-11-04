@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Comment</title>
+<style>
+.result {
+	text-align: center;
+	width: 40%;
+	margin: auto;
+}
+.errorlist { color: red;}
+ul li {
+	list-style-type:None;
+}
+</style>
+	</head>
+
+
+	<body>
+		<div class = 'result'>
+			{% if succeed %}
+			SUCCEED!
+			<a href = '{{ target }}'>Return</a>
+			{% else %}
+			<ul class = 'errorlist'>
+				{% if error_msg %}
+				<li>{{ error_msg }}
+				{% endif %}
+				{% for field, message in form.errors.items %}
+				<li>{{ message }}</li>
+				{% endfor %}
+			</ul>
+			<a href = 'javascript:window.history.back();'>Return</a>
+			{% endif %}
+		</div>
+	</body>
+</html>

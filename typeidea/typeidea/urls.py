@@ -21,16 +21,20 @@ from .custom_site import custom_site
 from blog.views import post_list, post_detail
 from config.views import links
 
-from blog.views import IndexView, CategoryView, TagView, PostDetailView
-
+from blog.views import IndexView, CategoryView, TagView, PostDetailView, SearchView, AuthView
+from config.views import LinkView
+from comment.views import CommentView
 
 
 urlpatterns = [
     url(r'^$', IndexView.as_view(), name = 'index'),
     url(r'^category/(?P<category_id>\d+)/$', CategoryView.as_view(), name = 'category_list'),
     url(r'^tag/(?P<tag_id>\d+)/$', TagView.as_view(), name = 'tag_list'),
+    url(r'^auth/(?P<owner_id>\d+)/$', AuthView.as_view(), name = 'auth_list'),
     url(r'^post/(?P<post_id>\d+).html/$', PostDetailView.as_view(), name = 'post_detail'),
-    url(r'^links/$', links, name = 'links'),
+    url(r'^comment/$', CommentView.as_view(), name = 'comment'),
+    url(r'^search/$',SearchView.as_view(), name = 'search_list'),
+    url(r'^links/$', LinkView.as_view(), name = 'links'),
     url(r'^super_admin/', admin.site.urls, name = 'super_admin'),
     url(r'^admin/', custom_site.urls, name = 'admin'),
 ]

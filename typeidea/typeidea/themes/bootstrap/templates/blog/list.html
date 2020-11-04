@@ -6,6 +6,8 @@
 	Tag:{{ tag.name }}
 	{% elif category %}
 	Category:{{ category.name }}
+	{% elif owner %}
+	Auth:{{ owner }}
 	{% else %}
 	HomePage
 	{% endif %}
@@ -18,12 +20,13 @@
 		<div class = 'card-body'>
 			<h5 class = 'card-title'><a href = "{% url 'post_detail' post.id%}">
 					{{ post.title }}</a></h5>
-			<span class = 'card-link'>Auth:<a href = '#'>{{ post.owner.username }}
+			<span class = 'card-link'>Auth:<a href = "{% url 'auth_list' post.owner.id %}">{{ post.owner.username }}
 				</a></span>
 			<span class = 'card-link'>Category:<a href = "{% url 'category_list' post.category.id %}">
 					{{ post.category.name }}</a></span>
 			<span class = 'card-link'>Tag:<a href = "{% url 'tag_list' post.tag.id %}">
 					{{ post.tag.name }}</a></span>
+			<hr/>
 			<p class = 'card-text'>{{ post.desc }}<a href = "{% url 'post_detail' post.id %}">
 				All content</a></p>
 		</div>
@@ -32,11 +35,11 @@
 
 	{% if page_obj %}
 	{% if page_obj.has_previous %}
-		<a href = '?page={{ page_obj.previous_page_number }}'>pre</a>
+	<a href = '?page={{ page_obj.previous_page_number }}{% if keyword %}&keyword={{ keyword }}{% endif %}'>pre</a>
 	{% endif %}
 		Page {{ page_obj.number }} of {{ paginator.num_pages }}
 	{% if page_obj.has_next %}
-		<a href = '?page={{ page_obj.next_page_number }}'>next</a>
+	<a href = '?page={{ page_obj.next_page_number }}{% if keyword %}&keyword={{ keyword }}{% endif %}'>next</a>
 	{% endif %}
 	{% endif %}
 
