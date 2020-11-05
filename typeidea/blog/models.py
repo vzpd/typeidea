@@ -74,11 +74,12 @@ class Post(models.Model):
     title = models.CharField(max_length = 255, verbose_name = 'title')
     desc = models.CharField(max_length = 1024, blank = True, verbose_name = 'desc')
     content = models.TextField(verbose_name = 'content', help_text = 'content must be type of MarkDown')
+    is_md = models.BooleanField(default = False, verbose_name = 'markdown')
     content_html = models.TextField(verbose_name = 'Content html',blank = True, editable = False)
     status = models.PositiveIntegerField(default = STATUS_NORMAL,
             choices = STATUS_ITEMS, verbose_name = 'status')
     category = models.ForeignKey(Category, on_delete = models.DO_NOTHING, verbose_name = 'category')
-    tag = models.ForeignKey(Tag, on_delete = models.DO_NOTHING, verbose_name = 'tag')
+    tag = models.ManyToManyField(Tag, verbose_name = 'tag')
     owner = models.ForeignKey(User, blank = True, on_delete = models.DO_NOTHING, verbose_name = 'owner')
     created_time = models.DateTimeField(auto_now_add = True, verbose_name = 'created_time') 
     pv = models.PositiveIntegerField(default = 1)
@@ -125,5 +126,11 @@ class Post(models.Model):
 
 
     def save(self, *args, **kwargs):
-        self.content_html = mistune.markdown(self.content)
+        if self.is_md:
+            self.content_html = mistune.markdown(self.content)
+        else:
+            self.content_html = self.content
+        print('----------------------save------------------')
+        print(self.__dict__)
+        print('----------------------save------------------')
         super().save(*args, **kwargs)

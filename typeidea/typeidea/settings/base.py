@@ -31,6 +31,10 @@ ALLOWED_HOSTS = ['*',]
 # Application definition
 
 INSTALLED_APPS = [
+    'dal',
+    'dal_select2',
+    'ckeditor',
+    'ckeditor_uploader',
     'typeidea',
     'blog',
     'comment',
@@ -42,6 +46,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+CKEDITOR_CONFIGS = {
+        'default': {
+        'toobar':'full',
+        'height': 300,
+        'width': 800,
+        'tabSpaces': 4,
+        'extraPlugins': 'codesnippet',
+        }
+        }
 
 MIDDLEWARE = [
     'blog.middleware.user_id.UserIDMiddleware',
@@ -101,6 +115,9 @@ LOGGING = {
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
+
+DEFAULT_FILE_STORAGE = 'typeidea.storage.WatermarkStorage'
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -141,3 +158,7 @@ STATIC_ROOT = '/tmp/static/'
 STATICFILES_DIRS = [
         os.path.join(BASE_DIR, 'themes', THEME, 'static'),
         ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+CKEDITOR_UPLOAD_PATH = 'article_images'

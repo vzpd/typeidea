@@ -70,8 +70,11 @@ class PostAdmin(BaseOwnerAdmin):
         ),
         ('CONTENT',{
             'fields':(
+                'is_md',
                 'desc',
-                'content',
+                'content_ck',
+                'content_md',
+                'content'
                 )
             }
         ),
