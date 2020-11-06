@@ -116,8 +116,10 @@ class Post(models.Model):
         return post_list, category
 
     @classmethod
-    def latest_posts(cls):
+    def latest_posts(cls, with_related = True):
         queryset = cls.objects.filter(status = cls.STATUS_NORMAL)
+        if with_related:
+            queryset = queryset.select_related('owner', 'category').prefetch_related('tag')
         return queryset
 
     @classmethod
@@ -130,7 +132,4 @@ class Post(models.Model):
             self.content_html = mistune.markdown(self.content)
         else:
             self.content_html = self.content
-        print('----------------------save------------------')
-        print(self.__dict__)
-        print('----------------------save------------------')
         super().save(*args, **kwargs)

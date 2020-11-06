@@ -29,6 +29,15 @@ from .autocomplete import CategoryAutocomplete, TagAutocomplete
 from django.conf import settings
 from django.conf.urls.static import static
 
+from rest_framework.routers import DefaultRouter
+from rest_framework.documentation import include_docs_urls
+
+from blog.apis import PostViewSet, CategoryViewSet
+
+
+router = DefaultRouter()
+router.register(r'post', PostViewSet, basename = 'api_post')
+router.register(r'category', CategoryViewSet, basename = 'api_category')
 
 
 urlpatterns = [
@@ -45,4 +54,12 @@ urlpatterns = [
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^super_admin/', admin.site.urls, name = 'super_admin'),
     url(r'^admin/', custom_site.urls, name = 'admin'),
+    url(r'^api/', include((router.urls, 'blog'), namespace = 'api')),
+    url(r'^api/docs/', include_docs_urls(title = 'Typeidea apis')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+            url(r'^__debug__/', include(debug_toolbar.urls)),
+        ] + urlpatterns

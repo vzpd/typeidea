@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*',]
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'dal',
     'dal_select2',
     'ckeditor',
@@ -90,6 +91,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'typeidea.wsgi.application'
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    # 新版drf schema_class默认用的是rest_framework.schemas.openapi.AutoSchema
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 5,
+
+}
 
 LOGGING = {
     'version': 1,
