@@ -58,7 +58,7 @@ class SideBar(models.Model):
     content = models.CharField(max_length = 500, blank = True, verbose_name = 'content',
             help_text = 'if display type is not HTML, this can be blank')
     status = models.PositiveIntegerField(default = STATUS_SHOW, choices = STATUS_ITMES,
-            verbose_name = 'status')
+            verbose_name = 'status', db_index = True)
     owner = models.ForeignKey(User, on_delete = models.DO_NOTHING, verbose_name = 'owner')
     created_time = models.DateTimeField(auto_now_add = True, verbose_name = 'created time')
 

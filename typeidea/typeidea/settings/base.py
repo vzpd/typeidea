@@ -94,7 +94,6 @@ WSGI_APPLICATION = 'typeidea.wsgi.application'
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
-    # 新版drf schema_class默认用的是rest_framework.schemas.openapi.AutoSchema
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 5,
 
@@ -118,11 +117,6 @@ LOGGING = {
     }
 }
 
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-# Password validation
-# https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
 
 DEFAULT_FILE_STORAGE = 'typeidea.storage.WatermarkStorage'

@@ -16,7 +16,7 @@ class Comment(models.Model):
     website = models.URLField(verbose_name = 'website')
     email = models.EmailField(verbose_name = 'email')
     status = models.PositiveIntegerField(default = STATUS_NORMAL,
-            choices = STATUS_ITEMS, verbose_name = 'status')
+            choices = STATUS_ITEMS, verbose_name = 'status', db_index = True)
     owner = models.ForeignKey(User, on_delete = models.DO_NOTHING, verbose_name = 'owner')
     created_time = models.DateTimeField(auto_now_add = True, verbose_name = 'created time')
 
