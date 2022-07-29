@@ -33,7 +33,7 @@ Jinja2==2.11.2
 lockfile==0.12.2
 MarkupPy==1.14
 MarkupSafe==1.1.1
-mistune==0.8.4
+mistune==2.0.3
 msgpack==0.6.2
 odfpy==1.4.1
 openpyxl==3.0.5
